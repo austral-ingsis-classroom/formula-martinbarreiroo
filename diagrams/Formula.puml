@@ -1,0 +1,38 @@
+@startuml
+
+interface Function {
+    +print(): String
+    +listVariables(): List<String>
+    +calculate(): double
+}
+
+class Operation {
+    - operator: char
+    - leftOperand: Function
+    - rightOperand: Function
+    + print(): String
+    + listVariables(): List<String>
+    + calculate(): double
+}
+
+class Variable {
+    - name: String
+    + print(): String
+    + listVariables(): List<String>
+    + calculate(): double
+}
+
+class Number {
+    - value: double
+    + print(): String
+    + listVariables(): List<String>
+    + calculate(): double
+}
+
+Function <|.. Operation
+Function <|.. Variable
+Function <|.. Number
+Operation o-- Function
+Variable o-- Function
+
+@enduml
