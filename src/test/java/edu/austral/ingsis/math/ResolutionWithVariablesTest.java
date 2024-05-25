@@ -1,16 +1,20 @@
 package edu.austral.ingsis.math;
 
-import org.junit.jupiter.api.Test;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 public class ResolutionWithVariablesTest {
 
   /** Case 1 + x where x = 3 */
   @Test
   public void shouldResolveFunction1() {
-    final Double result = 4d;
+
+    Function xEq3 = new Variable("x", 3);
+    Function one = new Number(1);
+    Function function = new Operation(one, xEq3, '+');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(4d));
   }
@@ -18,7 +22,11 @@ public class ResolutionWithVariablesTest {
   /** Case 12 / div where div = 4 */
   @Test
   public void shouldResolveFunction2() {
-    final Double result = 3d;
+
+    Function div = new Variable("div", 4);
+    Function twelve = new Number(12);
+    Function function = new Operation(twelve, div, '/');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(3d));
   }
@@ -26,7 +34,12 @@ public class ResolutionWithVariablesTest {
   /** Case (9 / x) * y where x = 3 and y = 4 */
   @Test
   public void shouldResolveFunction3() {
-    final Double result = 12d;
+
+    Function x = new Variable("x", 3);
+    Function y = new Variable("y", 4);
+    Function nine = new Number(9);
+    Function function = new Operation(new Operation(nine, x, '/'), y, '*');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(12d));
   }
@@ -34,7 +47,12 @@ public class ResolutionWithVariablesTest {
   /** Case (27 / a) ^ b where a = 9 and b = 3 */
   @Test
   public void shouldResolveFunction4() {
-    final Double result = 27d;
+
+    Function a = new Variable("a", 9);
+    Function b = new Variable("b", 3);
+    Function twentySeven = new Number(27);
+    Function function = new Operation(new Operation(twentySeven, a, '/'), b, '^');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(27d));
   }
@@ -42,7 +60,11 @@ public class ResolutionWithVariablesTest {
   /** Case z ^ (1/2) where z = 36 */
   @Test
   public void shouldResolveFunction5() {
-    final Double result = 6d;
+
+    Function z = new Variable("z", 36);
+    Function half = new Number(0.5);
+    Function function = new Operation(z, half, '^');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(6d));
   }
@@ -50,7 +72,12 @@ public class ResolutionWithVariablesTest {
   /** Case |value| - 8 where value = 8 */
   @Test
   public void shouldResolveFunction6() {
-    final Double result = 0d;
+
+    Function value = new Variable("value", 8);
+    Function eight = new Number(8);
+    Function absValue = new Operation(value, null, '|');
+    Function function = new Operation(absValue, eight, '-');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(0d));
   }
@@ -58,7 +85,11 @@ public class ResolutionWithVariablesTest {
   /** Case |value| - 8 where value = 8 */
   @Test
   public void shouldResolveFunction7() {
-    final Double result = 0d;
+    Function value = new Variable("value", 8);
+    Function eight = new Number(8);
+    Function absValue = new Operation(value, null, '|');
+    Function function = new Operation(absValue, eight, '-');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(0d));
   }
@@ -66,7 +97,12 @@ public class ResolutionWithVariablesTest {
   /** Case (5 - i) * 8 where i = 2 */
   @Test
   public void shouldResolveFunction8() {
-    final Double result = 24d;
+
+    Function i = new Variable("i", 2);
+    Function five = new Number(5);
+    Function eight = new Number(8);
+    Function function = new Operation(new Operation(five, i, '-'), eight, '*');
+    final Double result = function.calculate();
 
     assertThat(result, equalTo(24d));
   }
