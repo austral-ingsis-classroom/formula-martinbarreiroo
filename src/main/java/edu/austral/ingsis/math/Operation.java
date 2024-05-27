@@ -16,21 +16,27 @@ public class Operation implements Function {
 
   @Override
   public double calculate() {
-    return switch (operator) {
-      case '+' -> leftOperand.calculate() + rightOperand.calculate();
-      case '-' -> leftOperand.calculate() - rightOperand.calculate();
-      case '*' -> leftOperand.calculate() * rightOperand.calculate();
-      case '/' -> leftOperand.calculate() / rightOperand.calculate();
-      case '^' -> Math.pow(leftOperand.calculate(), rightOperand.calculate());
-      case '|' -> Math.abs(leftOperand.calculate());
-      default -> throw new IllegalArgumentException("Invalid operator");
-    };
+    switch (operator) {
+      case '+':
+        return leftOperand.calculate() + rightOperand.calculate();
+      case '-':
+        return leftOperand.calculate() - rightOperand.calculate();
+      case '*':
+        return leftOperand.calculate() * rightOperand.calculate();
+      case '/':
+        return leftOperand.calculate() / rightOperand.calculate();
+      case '^':
+        return Math.pow(leftOperand.calculate(), rightOperand.calculate());
+      case '|':
+        return Math.abs(leftOperand.calculate());
+      default:
+        throw new IllegalArgumentException("Invalid operator");
+    }
   }
 
   @Override
   public List<String> listVariables() {
-    List<String> variables = new ArrayList<>();
-    variables.addAll(leftOperand.listVariables());
+      List<String> variables = new ArrayList<>(leftOperand.listVariables());
     if (rightOperand != null) {
       variables.addAll(rightOperand.listVariables());
     }
