@@ -36,7 +36,7 @@ public class Operation implements Function {
 
   @Override
   public List<String> listVariables() {
-      List<String> variables = new ArrayList<>(leftOperand.listVariables());
+    List<String> variables = new ArrayList<>(leftOperand.listVariables());
     if (rightOperand != null) {
       variables.addAll(rightOperand.listVariables());
     }
