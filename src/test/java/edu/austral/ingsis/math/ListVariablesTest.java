@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 
-import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,10 @@ public class ListVariablesTest {
   /** Case 1 + 6 */
   @Test
   public void shouldListVariablesFunction1() {
-    final List<String> result = Collections.emptyList();
+    Function one = new Number(1);
+    Function six = new Number(6);
+    Function function = new Operation(one, six, '+');
+    final List<String> result = function.listVariables();
 
     assertThat(result, empty());
   }
